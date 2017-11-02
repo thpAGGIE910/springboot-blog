@@ -19,4 +19,10 @@ public class PostsController {
     public String getPostDetails(@PathVariable long id) {
         return "view an individual post";
     }
+
+    @GetMapping("/posts/create")
+    @ResponseBody
+    public String showCreatePostForm() {
+        return "view the form for creating a post";
+    }
 }
