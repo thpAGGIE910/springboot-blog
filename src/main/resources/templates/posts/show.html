@@ -3,8 +3,10 @@
 <head th:replace="partials/partials::head(${post.title})"></head>
 <body>
     <nav th:replace="partials/partials::navbar"></nav>
-    <h1 th:text="${post.title}"></h1>
-    <p th:text="${post.body}"></p>
-    <footer th:include="partials/partials::footer"></footer>
+    <div class="container">
+        <h1 th:text="${post.title}"></h1>
+        <p th:text="${post.body}"></p>
+    </div>
+    <footer class="container-fluid" th:include="partials/partials::footer"></footer>
 </body>
 </html>
