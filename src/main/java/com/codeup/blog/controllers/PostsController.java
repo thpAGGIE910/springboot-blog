@@ -39,8 +39,8 @@ public class PostsController {
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createNewPost() {
-        return "create a new post";
+    public String createNewPost(@ModelAttribute Post post) {
+        postSvc.save(post);
+        return "redirect:/posts";
     }
 }
