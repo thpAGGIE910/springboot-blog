@@ -5,10 +5,7 @@ import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostsController {
@@ -36,7 +33,6 @@ public class PostsController {
     }
 
     @GetMapping("/posts/create")
-
     public String showCreatePostForm(Model viewModel) {
         viewModel.addAttribute("post", new Post());
         return "posts/create";
