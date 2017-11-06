@@ -43,4 +43,10 @@ public class PostsController {
         postSvc.save(post);
         return "redirect:/posts";
     }
+
+    @GetMapping("/posts/{id}/edit")
+    public String showUpdatePostForm(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("post", postSvc.findOne(id));
+        return "posts/create";
+    }
 }
