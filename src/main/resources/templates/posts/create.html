@@ -2,8 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/partials::head('title')"></head>
 <body>
-<nav th:replace="partials/partials::navbar"></nav>
+    <nav th:replace="partials/partials::navbar"></nav>
+    <div class="container">
+        <form action="/posts/create" method="post">
 
-<footer th:include="partials/partials::footer"></footer>
+            <!--<h1 th:if="${post.id == null}" th:text="'New Blog Post'"></h1>-->
+            <!--<h1 th:if="${post.id != null}" th:text=""></h1>-->
+            <h1 th:text="${(post.id == 0 ? 'New Blog ' : 'Update Blog ') + 'Post'}"></h1>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" class="form-control" name="title" placeholder="Title" />
+            </div>
+            <div class="form-group">
+                <label for="body">Body</label>
+                <textarea name="body" id="body" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" th:text="${(post.id == 0 ? 'Add' : 'Update') + ' Post'}"></button>
+        </form>
+    </div>
+    <footer th:include="partials/partials::footer"></footer>
 </body>
 </html>
