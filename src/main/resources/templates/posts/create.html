@@ -4,7 +4,7 @@
 <body>
     <nav th:replace="partials/partials::navbar"></nav>
     <div class="container">
-        <form action="/posts/create" method="post" th:object="${post}">
+        <form th:action="@{${post.id == 0 ? '/posts/create' : '/posts/' + post.id + '/edit'}}" method="post" th:object="${post}">
             <h1 th:text="${(post.id == 0 ? 'New Blog' : 'Update Blog') + ' Post'}"></h1>
             <div class="form-group">
                 <label for="title">Title</label>
