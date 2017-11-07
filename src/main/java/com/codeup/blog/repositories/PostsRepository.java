@@ -1,4 +1,8 @@
 package com.codeup.blog.repositories;
 
-public interface PostsRepository {
+import com.codeup.blog.models.Post;
+import org.springframework.data.repository.CrudRepository;
+
+public interface PostsRepository extends CrudRepository<Post, Long> {
+
 }
