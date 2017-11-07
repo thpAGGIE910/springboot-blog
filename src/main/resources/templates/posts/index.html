@@ -4,9 +4,10 @@
 <body>
     <nav th:replace="partials/partials::navbar"></nav>
     <div class="container">
+        <p th:if="${error}" th:text="${error}"></p>
         <h1>All Posts</h1>
         <div th:each="post : ${posts}">
-            <h2><a href="/posts/1" th:text="${post.title}"></a></h2>
+            <h2><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></h2>
             <p th:text="${post.body}"></p>
         </div>
     </div>

@@ -27,7 +27,8 @@ public class PostsController {
         try {
             viewModel.addAttribute("post", postSvc.findOne(id));
             return "posts/show";
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
+            viewModel.addAttribute("error", String.format("Post with id %s does not exist!", id));
             return "posts/index";
         }
     }
