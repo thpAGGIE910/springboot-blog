@@ -1,6 +1,7 @@
 package com.codeup.blog.controllers;
 
 import com.codeup.blog.models.Post;
+
 import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,7 +58,7 @@ public class PostsController {
         return "redirect:/posts";
     }
 
-    @GetMapping("/posts/{id}/delete")
+    @PostMapping("/posts/{id}/delete")
     public String deleteExistingPost(@PathVariable long id) {
         postsSvc.delete(id);
         return "redirect:/posts";
