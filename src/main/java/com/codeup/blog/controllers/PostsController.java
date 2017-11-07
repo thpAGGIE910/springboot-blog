@@ -1,13 +1,11 @@
 package com.codeup.blog.controllers;
 
+import com.codeup.blog.models.Post;
 import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostsController {
@@ -35,14 +33,20 @@ public class PostsController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
-    public String showCreatePostForm() {
-        return "view the form for creating a post";
+    public String showCreatePostForm(Model viewModel) {
+        viewModel.addAttribute("post", new Post());
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createNewPost() {
-        return "create a new post";
+    public String createNewPost(@ModelAttribute Post post) {
+        postSvc.save(post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    public String showUpdatePostForm(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("post", postSvc.findOne(id));
+        return "posts/create";
     }
 }
