@@ -2,7 +2,6 @@ package com.codeup.blog.controllers;
 
 import com.codeup.blog.models.Post;
 import com.codeup.blog.repositories.PostsRepository;
-import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,5 +49,11 @@ public class PostsController {
     public String showUpdatePostForm(@PathVariable long id, Model viewModel) {
         viewModel.addAttribute("post", postsDao.findOne(id));
         return "posts/create";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String updateExistingPost(@PathVariable long id, @ModelAttribute Post post) {
+        postsDao.save(post);
+        return "redirect:/posts";
     }
 }
