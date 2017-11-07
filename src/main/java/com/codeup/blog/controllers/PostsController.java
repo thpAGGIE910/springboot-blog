@@ -1,6 +1,7 @@
 package com.codeup.blog.controllers;
 
 import com.codeup.blog.models.Post;
+import com.codeup.blog.repositories.PostsRepository;
 import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,23 +10,23 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostsController {
-    private final PostSvc postSvc;
+    private final PostsRepository postsDao;
 
     @Autowired
-    public PostsController(PostSvc postSvc) {
-        this.postSvc = postSvc;
+    public PostsController(PostsRepository postsDao) {
+        this.postsDao = postsDao;
     }
 
     @GetMapping("/posts")
     public String viewAllPosts(Model viewModel) {
-        viewModel.addAttribute("posts", postSvc.findAll());
+        viewModel.addAttribute("posts", postsDao.findAll());
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
     public String getPostDetails(@PathVariable long id, Model viewModel) {
         try {
-            viewModel.addAttribute("post", postSvc.findOne(id));
+            viewModel.addAttribute("post", postsDao.findOne(id));
             return "posts/show";
         } catch (IndexOutOfBoundsException e) {
             viewModel.addAttribute("error", String.format("Post with id %s does not exist!", id));
@@ -41,13 +42,13 @@ public class PostsController {
 
     @PostMapping("/posts/create")
     public String createNewPost(@ModelAttribute Post post) {
-        postSvc.save(post);
+        postsDao.save(post);
         return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}/edit")
     public String showUpdatePostForm(@PathVariable long id, Model viewModel) {
-        viewModel.addAttribute("post", postSvc.findOne(id));
+        viewModel.addAttribute("post", postsDao.findOne(id));
         return "posts/create";
     }
 }
