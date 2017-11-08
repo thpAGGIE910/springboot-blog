@@ -1,6 +1,7 @@
 package com.codeup.blog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -16,13 +17,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public User() {}
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts;
 
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+    public User() {}
 
     public String getUsername() {
         return username;
