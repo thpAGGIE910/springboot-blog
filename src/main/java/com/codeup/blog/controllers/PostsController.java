@@ -2,6 +2,7 @@ package com.codeup.blog.controllers;
 
 import com.codeup.blog.models.Post;
 
+import com.codeup.blog.repositories.UsersRepository;
 import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostsController {
     private final PostSvc postsSvc;
+    private UsersRepository users;
 
     @Autowired
-    public PostsController(PostSvc postsSvc) {
+    public PostsController(PostSvc postsSvc, UsersRepository users) {
         this.postsSvc = postsSvc;
+        this.users = users;
     }
 
     @GetMapping("/posts")
@@ -42,6 +45,7 @@ public class PostsController {
 
     @PostMapping("/posts/create")
     public String createNewPost(@ModelAttribute Post post) {
+        post.setUser(users.findOne(1L));
         postsSvc.save(post);
         return "redirect:/posts";
     }
@@ -54,6 +58,7 @@ public class PostsController {
 
     @PostMapping("/posts/{id}/edit")
     public String updateExistingPost(@PathVariable long id, @ModelAttribute Post post) {
+        post.setUser(users.findOne(1L));
         postsSvc.save(post);
         return String.format("redirect:/posts/%s", id);
     }
