@@ -10,6 +10,7 @@
             <h2><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></h2>
             <p th:text="${post.body}"></p>
         </div>
+        <a th:href="@{/posts/create}" class="btn btn-success">Create New Post</a>
     </div>
     <footer class="contiainer-fluid" th:include="partials/partials::footer"></footer>
 </body>
