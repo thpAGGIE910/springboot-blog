@@ -15,6 +15,7 @@
                 <textarea th:field="*{body}" class="form-control"></textarea>
             </div>
             <button class="btn btn-primary" type="submit" th:text="${(post.id == 0 ? 'Add' : 'Update') + ' Post'}"></button>
+            <a th:href="@{/posts}" class="btn btn-default">Cancel</a>
         </form>
     </div>
     <footer th:include="partials/partials::footer"></footer>

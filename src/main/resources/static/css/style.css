@@ -3,3 +3,7 @@
     height: 10rem;
     resize: none;
 }
+
+.delete-form {
+    display: inline-block;
+}
