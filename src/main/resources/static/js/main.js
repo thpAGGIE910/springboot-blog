@@ -1,9 +1,11 @@
 $(document).ready(function () {
-        $("#delete-btn").click(function (evt) {
+        $(".btn-danger").click(function (evt) {
                 evt.preventDefault();
-                deleteUrl = $(this).getAttribute('href');
+                deleteUrl = $(this).parent().attr('action');
                 if(confirm("Are you sure you want to delete this post?")) {
-                    window.location.replace(deleteUrl);
+                    $.post(deleteUrl).done(function() {
+                        window.location.replace('/posts');
+                    });
                 }
             }
         );

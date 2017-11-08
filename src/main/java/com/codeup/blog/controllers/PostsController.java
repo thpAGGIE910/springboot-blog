@@ -55,12 +55,13 @@ public class PostsController {
     @PostMapping("/posts/{id}/edit")
     public String updateExistingPost(@PathVariable long id, @ModelAttribute Post post) {
         postsSvc.save(post);
-        return "redirect:/posts";
+        return String.format("redirect:/posts/%s", id);
     }
 
     @PostMapping("/posts/{id}/delete")
+    @ResponseBody
     public String deleteExistingPost(@PathVariable long id) {
         postsSvc.delete(id);
-        return "redirect:/posts";
+        return "Post deleted";
     }
 }
