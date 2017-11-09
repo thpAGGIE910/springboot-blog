@@ -4,8 +4,7 @@
 <body>
     <nav th:replace="partials/partials::navbar"></nav>
     <div class="container" th:object="${post}">
-        <h1 th:text="*{title}"></h1>
-        <h3 th:text="*{user.email}"></h3>
+        <h1><span th:text="*{title}"></span><small th:text="' Created by ' + *{user.email}"></small></h1>
         <p th:text="*{body}"></p>
         <a th:href="@{/posts/{id}/edit(id=*{id})}" class="btn btn-primary">Edit Post</a>
         <form th:action="@{/posts/{id}/delete(id=*{id})}" method="post" class="delete-form">
