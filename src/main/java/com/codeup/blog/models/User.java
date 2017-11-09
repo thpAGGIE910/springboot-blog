@@ -22,6 +22,13 @@ public class User {
 
     public User() {}
 
+    public User(User user) {
+        this.id = user.id;
+        this.username = user.username;
+        this.email = user.email;
+        this.password = user.password;
+    }
+
     public String getUsername() {
         return username;
     }
