@@ -33,4 +33,9 @@ public class UsersController {
         users.save(user);
         return "redirect:/login";
     }
+
+    @GetMapping("/login")
+    public String displayLoginForm() {
+        return "users/login";
+    }
 }
