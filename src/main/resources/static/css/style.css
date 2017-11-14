@@ -7,3 +7,7 @@
 .delete-form {
     display: inline-block;
 }
+
+nav .btn-link {
+    margin-top: .6em;
+}

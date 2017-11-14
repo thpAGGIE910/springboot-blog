@@ -2,9 +2,10 @@ package com.codeup.blog.controllers;
 
 import com.codeup.blog.models.Post;
 
-import com.codeup.blog.repositories.UsersRepository;
+import com.codeup.blog.models.User;
 import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,12 +16,10 @@ import javax.validation.Valid;
 @Controller
 public class PostsController {
     private final PostSvc postsSvc;
-    private UsersRepository users;
 
     @Autowired
-    public PostsController(PostSvc postsSvc, UsersRepository users) {
+    public PostsController(PostSvc postsSvc) {
         this.postsSvc = postsSvc;
-        this.users = users;
     }
 
     @GetMapping("/posts")
@@ -48,12 +47,14 @@ public class PostsController {
 
     @PostMapping("/posts/create")
     public String createNewPost(@Valid Post post, Errors validation, Model viewModel) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         if(validation.hasErrors()) {
             viewModel.addAttribute("errors", validation);
             viewModel.addAttribute("post", post);
             return "posts/create";
         }
-        post.setUser(users.findOne(1L));
+        post.setUser(loggedInUser);
         postsSvc.save(post);
         return "redirect:/posts";
     }
@@ -66,12 +67,14 @@ public class PostsController {
 
     @PostMapping("/posts/{id}/edit")
     public String updateExistingPost(@PathVariable long id, @Valid Post post, Errors validation, Model viewModel) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         if(validation.hasErrors()) {
             viewModel.addAttribute("errors", validation);
             viewModel.addAttribute("post", post);
             return "posts/create";
         }
-        post.setUser(users.findOne(1L));
+        post.setUser(loggedInUser);
         postsSvc.save(post);
         return String.format("redirect:/posts/%s", id);
     }
