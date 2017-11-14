@@ -7,7 +7,10 @@ import com.codeup.blog.services.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class PostsController {
@@ -44,7 +47,12 @@ public class PostsController {
     }
 
     @PostMapping("/posts/create")
-    public String createNewPost(@ModelAttribute Post post) {
+    public String createNewPost(@Valid Post post, Errors validation, Model viewModel) {
+        if(validation.hasErrors()) {
+            viewModel.addAttribute("errors", validation);
+            viewModel.addAttribute("post", post);
+            return "posts/create";
+        }
         post.setUser(users.findOne(1L));
         postsSvc.save(post);
         return "redirect:/posts";
@@ -57,7 +65,12 @@ public class PostsController {
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String updateExistingPost(@PathVariable long id, @ModelAttribute Post post) {
+    public String updateExistingPost(@PathVariable long id, @Valid Post post, Errors validation, Model viewModel) {
+        if(validation.hasErrors()) {
+            viewModel.addAttribute("errors", validation);
+            viewModel.addAttribute("post", post);
+            return "posts/create";
+        }
         post.setUser(users.findOne(1L));
         postsSvc.save(post);
         return String.format("redirect:/posts/%s", id);
