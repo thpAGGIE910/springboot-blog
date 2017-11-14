@@ -13,7 +13,7 @@ import java.util.Collections;
 
 @Service
 public class UserDetailsLoader implements UserDetailsService {
-    private UsersRepository users;
+    private final UsersRepository users;
 
     @Autowired
     public UserDetailsLoader(UsersRepository users) {
