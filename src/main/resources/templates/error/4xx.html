@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials::head(${error})"></head>
+<body>
+<nav th:replace="partials/partials::navbar"></nav>
+<div class="container">
+    <h1>Lost, you are</h1>
+    <img class="img-responsive yoda" th:src="@{/img/yoda.png}" alt="Yoda" />
+    <p>Unfortunately, the resource you requested is not on this server. Please check your URL and try again.</p>
+</div>
+<footer th:include="partials/partials::footer"></footer>
+</body>
+</html>
