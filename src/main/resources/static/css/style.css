@@ -1,3 +1,20 @@
+html {
+    position: relative;
+    min-height: 100vh;
+}
+
+body {
+    margin-bottom: 8vh;
+}
+
+footer {
+    padding-left: .5em;
+    position: absolute;
+    bottom: 0;
+    height: 5vh;
+    margin-top: 1em;
+}
+
 #body {
     overflow: scroll;
     height: 10rem;
