@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials::head('Oops, ' + ${error})"></head>
+<body>
+<nav th:replace="partials/partials::navbar"></nav>
+<div class="container">
+    <h1>This isn't the page you are looking for</h1>
+    <img class="img-responsive obi-wan" th:src="@{/img/not_the_droids.jpg}" alt="Obi Wan Not the Droids" />
+    <p>We apologize but we had an error on our end, please try again. If this is not your first time viewing this page please contact our technical support team at (210)555-5555.</p>
+</div>
+<footer th:include="partials/partials::footer"></footer>
+</body>
+</html>
